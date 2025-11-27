@@ -1,106 +1,10 @@
 # Creating a client
 
-Clients are custom applications or scripts that communicate directly with an MCP Server to request resources, tools, and prompts. Unlike using the inspector tool, which provides a graphical interface for interacting with the server, writing your own client allows for programmatic and automated interactions. This enables developers to integrate MCP capabilities into their own workflows, automate tasks, and build custom solutions tailored to specific needs.
-
-## Overview
-
-This lesson introduces the concept of clients within the Model Context Protocol (MCP) ecosystem. You'll learn how to write your own client and have it connect to an MCP Server.
-
-## Learning Objectives
-
-By the end of this lesson, you will be able to:
-
-- Understand what a client can do.
-- Write your own client.
-- Connect and test the client with an MCP server to ensure the latter works as expected.
-
-## What goes into writing a client?
-
-To write a client, you'll need to do the following:
-
-- **Import the correct libraries**. You'll be using the same library as before, just different constructs.
-- **Instantiate a client**. This will involve creating a client instance and connect it to the chosen transport method.
-- **Decide on what resources to list**. Your MCP server comes with resources, tools and prompts, you need to decide which one to list.
-- **Integrate the client to a host application**. Once you know the capabilities of the server you need to integrate this your host application so that if a user types a prompt or other command the corresponding server feature is invoked.
-
-Now that we understand at high level what we're about to do, let's look at an example next.
-
-### An example client
-
-Let's have a look at this example client:
-
-### TypeScript
-
-```typescript
-import { Client } from "@modelcontextprotocol/sdk/client/index.js";
-import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
-
-const transport = new StdioClientTransport({
-  command: "node",
-  args: ["server.js"]
-});
-
-const client = new Client(
-  {
-    name: "example-client",
-    version: "1.0.0"
-  }
-);
-
-await client.connect(transport);
-
-// List prompts
-const prompts = await client.listPrompts();
-
-// Get a prompt
-const prompt = await client.getPrompt({
-  name: "example-prompt",
-  arguments: {
-    arg1: "value"
-  }
-});
-
-// List resources
-const resources = await client.listResources();
-
-// Read a resource
-const resource = await client.readResource({
-  uri: "file:///example.txt"
-});
-
-// Call a tool
-const result = await client.callTool({
-  name: "example-tool",
-  arguments: {
-    arg1: "value"
-  }
-});
-```
-
-In the preceding code we:
-
-- Import the libraries
-- Create an instance of a client and connect it using stdio for transport.
-- List prompts, resources and tools and invoke them all.
-
-There you have it, a client that can talk to an MCP Server.
-
-Let's take our time in the next exercise section and break down each code snippet and explain what's going on.
-
 ## Exercise: Writing a client
-
-As said above, let's take our time explaining the code, and by all means code along if you want.
 
 ### -1- Import the libraries
 
 Let's import the libraries we need, we will need references to a client and to our chosen transport protocol, stdio. stdio is a protocol for things meant to run on your local machine. SSE is another transport protocol we will show in future chapters but that's your other option. For now though, let's continue with stdio.
-
-#### TypeScript
-
-```typescript
-import { Client } from "@modelcontextprotocol/sdk/client/index.js";
-import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
-```
 
 #### Python
 
@@ -108,61 +12,6 @@ import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js"
 from mcp import ClientSession, StdioServerParameters, types
 from mcp.client.stdio import stdio_client
 ```
-
-#### .NET
-
-```csharp
-using Microsoft.Extensions.AI;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using ModelContextProtocol.Client;
-using ModelContextProtocol.Protocol.Transport;
-```
-
-#### Java
-
-For Java, you'll create a client that connects to the MCP server from the previous exercise. Using the same Java Spring Boot project structure from [Getting Started with MCP Server](../01-first-server/solution/java), create a new Java class called `SDKClient` in the `src/main/java/com/microsoft/mcp/sample/client/` folder and add the following imports:
-
-```java
-import java.util.Map;
-import org.springframework.web.reactive.function.client.WebClient;
-import io.modelcontextprotocol.client.McpClient;
-import io.modelcontextprotocol.client.transport.WebFluxSseClientTransport;
-import io.modelcontextprotocol.spec.McpClientTransport;
-import io.modelcontextprotocol.spec.McpSchema.CallToolRequest;
-import io.modelcontextprotocol.spec.McpSchema.CallToolResult;
-import io.modelcontextprotocol.spec.McpSchema.ListToolsResult;
-```
-
-#### Rust
-
-You will need to add the following dependencies to your `Cargo.toml` file.
-
-```toml
-[package]
-name = "calculator-client"
-version = "0.1.0"
-edition = "2024"
-
-[dependencies]
-rmcp = { version = "0.5.0", features = ["client", "transport-child-process"] }
-serde_json = "1.0.141"
-tokio = { version = "1.46.1", features = ["rt-multi-thread"] }
-```
-
-From there, you can import the necessary libraries in your client code.
-
-```rust
-use rmcp::{
-    RmcpError,
-    model::CallToolRequestParam,
-    service::ServiceExt,
-    transport::{ConfigureCommandExt, TokioChildProcess},
-};
-use tokio::process::Command;
-```
-
-Let's move on to instantiation.
 
 ### -2- Instantiating client and transport
 
@@ -234,7 +83,7 @@ async def run():
             # Initialize the connection
             await session.initialize()
 
-          
+
 
 if __name__ == "__main__":
     import asyncio
@@ -287,12 +136,12 @@ Note, in "Arguments", you can either point to the *.csproj* or to the executable
 
 ```java
 public class SDKClient {
-    
+
     public static void main(String[] args) {
         var transport = new WebFluxSseClientTransport(WebClient.builder().baseUrl("http://localhost:8080"));
         new SDKClient(transport).run();
     }
-    
+
     private final McpClientTransport transport;
 
     public SDKClient(McpClientTransport transport) {
@@ -302,7 +151,7 @@ public class SDKClient {
     public void run() {
         var client = McpClient.sync(this.transport).build();
         client.initialize();
-        
+
         // Your client logic goes here
     }
 }
