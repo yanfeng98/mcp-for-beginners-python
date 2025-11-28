@@ -1,70 +1,10 @@
 # Complete MCP Client Examples
 
-This directory contains complete, working examples of MCP clients in different programming languages. Each client demonstrates the full functionality described in the main README.md tutorial.
-
 ## Available Clients
 
-### 1. Java Client (`client_example_java.java`)
-
-- **Transport**: SSE (Server-Sent Events) over HTTP
-- **Target Server**: `http://localhost:8080`
-- **Features**:
-  - Connection establishment and ping
-  - Tool listing
-  - Calculator operations (add, subtract, multiply, divide, help)
-  - Error handling and result extraction
-
-**To run:**
-
-```bash
-# Ensure your MCP server is running on localhost:8080
-javac client_example_java.java
-java client_example_java
-```
-
-### 2. C# Client (`client_example_csharp.cs`)
+### Python Client (`client_example_python.py`)
 
 - **Transport**: Stdio (Standard Input/Output)
-- **Target Server**: Local .NET MCP server via dotnet run
-- **Features**:
-  - Automatic server startup via stdio transport
-  - Tool and resource listing
-  - Calculator operations
-  - JSON result parsing
-  - Comprehensive error handling
-
-**To run:**
-
-```bash
-dotnet run
-```
-
-### 3. TypeScript Client (`client_example_typescript.ts`)
-
-- **Transport**: Stdio (Standard Input/Output)
-- **Target Server**: Local Node.js MCP server
-- **Features**:
-  - Full MCP protocol support
-  - Tool, resource, and prompt operations
-  - Calculator operations
-  - Resource reading and prompt execution
-  - Robust error handling
-
-**To run:**
-
-```bash
-# First compile TypeScript (if needed)
-npm run build
-
-# Then run the client
-npm run client
-# or
-node client_example_typescript.js
-```
-
-### 4. Python Client (`client_example_python.py`)
-
-- **Transport**: Stdio (Standard Input/Output)  
 - **Target Server**: Local Python MCP server
 - **Features**:
   - Async/await pattern for operations
@@ -115,16 +55,6 @@ Before running these clients, ensure you have:
 1. **The corresponding MCP server running** (from `../01-first-server/`)
 2. **Required dependencies installed** for your chosen language
 3. **Proper network connectivity** (for HTTP-based transports)
-
-## Key Differences Between Implementations
-
-| Language   | Transport | Server Startup | Async Model | Key Libraries       |
-|------------|-----------|----------------|-------------|---------------------|
-| Java       | SSE/HTTP  | External       | Sync        | WebFlux, MCP SDK    |
-| C#         | Stdio     | Automatic      | Async/Await | .NET MCP SDK        |
-| TypeScript | Stdio     | Automatic      | Async/Await | Node MCP SDK        |
-| Python     | Stdio     | Automatic      | AsyncIO     | Python MCP SDK      |
-| Rust       | Stdio     | Automatic      | Async/Await | Rust MCP SDK, Tokio |
 
 ## Next Steps
 
