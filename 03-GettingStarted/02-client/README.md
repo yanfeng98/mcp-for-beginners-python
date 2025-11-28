@@ -150,51 +150,18 @@ The solution directory is organized by programming language:
 
 ```text
 solution/
-├── typescript/          # TypeScript client with npm/Node.js setup
-│   ├── package.json     # Dependencies and scripts
-│   ├── tsconfig.json    # TypeScript configuration
-│   └── src/             # Source code
-├── java/                # Java Spring Boot client project
-│   ├── pom.xml          # Maven configuration
-│   ├── src/             # Java source files
-│   └── mvnw             # Maven wrapper
-├── python/              # Python client implementation
-│   ├── client.py        # Main client code
-│   ├── server.py        # Compatible server
-│   └── README.md        # Python-specific instructions
-├── dotnet/              # .NET client project
-│   ├── dotnet.csproj    # Project configuration
-│   ├── Program.cs       # Main client code
-│   └── dotnet.sln       # Solution file
-├── rust/                # Rust client implementation
-|  ├── Cargo.lock        # Cargo lock file
-|  ├── Cargo.toml        # Project configuration and dependencies
-|  ├── src               # Source code
-|  │   └── main.rs       # Main client code
-└── server/              # Additional .NET server implementation
-    ├── Program.cs       # Server code
-    └── server.csproj    # Server project file
+└── python/              # Python client implementation
+    ├── client.py        # Main client code
+    ├── server.py        # Compatible server
+    └── README.md        # Python-specific instructions
 ```
-
-### 🚀 What Each Solution Includes
-
-Each language-specific solution provides:
-
-- **Complete client implementation** with all features from the tutorial
-- **Working project structure** with proper dependencies and configuration
-- **Build and run scripts** for easy setup and execution
-- **Detailed README** with language-specific instructions
-- **Error handling** and result processing examples
 
 ### 📖 Using the Solutions
 
 1. **Navigate to your preferred language folder**:
 
    ```bash
-   cd solution/typescript/    # For TypeScript
-   cd solution/java/          # For Java
    cd solution/python/        # For Python
-   cd solution/dotnet/        # For .NET
    ```
 
 2. **Follow the README instructions** in each folder for:
@@ -214,17 +181,11 @@ For complete documentation and step-by-step instructions, see: **[📖 Solution 
 
 ## 🎯 Complete Examples
 
-We've provided complete, working client implementations for all programming languages covered in this tutorial. These examples demonstrate the full functionality described above and can be used as reference implementations or starting points for your own projects.
-
 ### Available Complete Examples
 
 | Language | File | Description |
 |----------|------|-------------|
-| **Java** | [`client_example_java.java`](./client_example_java.java) | Complete Java client using SSE transport with comprehensive error handling |
-| **C#** | [`client_example_csharp.cs`](./client_example_csharp.cs) | Complete C# client using stdio transport with automatic server startup |
-| **TypeScript** | [`client_example_typescript.ts`](./client_example_typescript.ts) | Complete TypeScript client with full MCP protocol support |
 | **Python** | [`client_example_python.py`](./client_example_python.py) | Complete Python client using async/await patterns |
-| **Rust** | [`client_example_rust.rs`](./client_example_rust.rs) | Complete Rust client using Tokio for async operations |
 
 Each complete example includes:
 
@@ -255,26 +216,13 @@ For detailed documentation about running and customizing these examples, see: **
 
 Both approaches are valuable - use the **solution folder** for complete projects and the **complete examples** for learning and reference.
 
-## Key Takeaways
-
-The key takeaways for this chapter is the following about clients:
-
-- Can be used to both discover and invoke features on the server.
-- Can start a server while it starts itself (like in this chapter) but clients can connect to running servers as well.
-- Is a great way to test out server capabilities next to alternatives like the Inspector as was described in the previous chapter.
-
 ## Additional Resources
 
 - [Building clients in MCP](https://modelcontextprotocol.io/quickstart/client)
 
 ## Samples
 
-- [Java Calculator](../samples/java/calculator/README.md)
-- [.Net Calculator](../samples/csharp/)
-- [JavaScript Calculator](../samples/javascript/README.md)
-- [TypeScript Calculator](../samples/typescript/README.md)
 - [Python Calculator](../samples/python/)
-- [Rust Calculator](../samples/rust/)
 
 ## What's Next
 
